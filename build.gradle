@@ -1,0 +1,94 @@
+group = 'es.antoniogo'
+version = '0.0.1-SNAPSHOT'
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.springframework.boot'
+
+    sourceCompatibility = '11'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    task view_paths {
+        doLast { task ->
+            println "$task.project.name"
+            println "------------------"
+            println "Main: $sourceSets.main.java.srcDirTrees"
+            println "   Resources: $sourceSets.main.resources.srcDirTrees"
+            println "Tests: $sourceSets.test.java.srcDirTrees"
+            println "   Resources: $sourceSets.test.resources.srcDirTrees"
+        }
+    }
+
+}
+
+subprojects {
+    group = "es.antoniogo.${rootProject.name}"
+
+    sourceSets {
+        main {
+            java { srcDirs = ['src/main/java'] }
+            resources { srcDirs = ['src/main/resources'] }
+        }
+
+        test {
+            java { srcDirs = ['src/test/java'] }
+            resources { srcDirs = ['src/test/resources'] }
+        }
+    }
+
+    bootJar {
+        enabled = false
+    }
+
+    jar {
+        enabled = true
+    }
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.5.1")
+    }
+}
+
+sourceSets {
+    main {
+        java { srcDirs = ['apps/src/main/java'] }
+        resources { srcDirs = ['apps/src/main/resources'] }
+    }
+
+    test {
+        java { srcDirs = ['apps/src/test/java'] }
+        resources { srcDirs = ['apps/src/test/resources'] }
+    }
+}
+
+apply plugin: 'application'
+
+bootJar {
+
+}
+
+mainClassName = 'es.antoniogo.apps.Starter'
+
+dependencies {
+    implementation project(":shared")
+    implementation project(":management")
+}

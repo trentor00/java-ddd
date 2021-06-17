@@ -1,22 +1,30 @@
 package es.antoniogo.management.orders.application.create;
 
-import es.antoniogo.management.orders.domain.Order;
-import es.antoniogo.management.orders.domain.OrderRepository;
+import es.antoniogo.management.orders.OrdersModuleUnitTestCase;
+import es.antoniogo.management.orders.domain.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-final class OrderCreatorTest {
+final class OrderCreatorTest extends OrdersModuleUnitTestCase {
+    private OrderCreator creator;
+
+    @BeforeEach
+    protected void setUp() {
+        super.setUp();
+
+        creator = new OrderCreator(repository);
+    }
+
     @Test
     void save_a_valid_order() {
-        OrderRepository repository = mock(OrderRepository.class);
-        OrderCreator    creator    = new OrderCreator(repository);
+        CreateOrderRequest request = CreateOrderRequestMother.random();
+        Order order = OrderMother.fromRequest(request);
 
-        Order order = new Order("some-id", "some-name");
+        creator.create(request);
 
-        creator.create(order.id(), order.name());
-
-        verify(repository, atLeastOnce()).save(order);
+        shouldHaveSaved(order);
     }
 }

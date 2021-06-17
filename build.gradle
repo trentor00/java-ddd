@@ -13,9 +13,9 @@ allprojects {
     }
 
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter-web'
         developmentOnly 'org.springframework.boot:spring-boot-devtools'
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        testImplementation 'com.github.javafaker:javafaker:1.0.2'
     }
 
     test {
@@ -47,6 +47,18 @@ subprojects {
         test {
             java { srcDirs = ['src/test/java'] }
             resources { srcDirs = ['src/test/resources'] }
+        }
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+
+        testImplementation rootProject.sourceSets.main.output
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        if (project.name != "shared") {
+            implementation project(":shared")
+            testImplementation project(":shared").sourceSets.test.output
         }
     }
 
@@ -89,6 +101,11 @@ bootJar {
 mainClassName = 'es.antoniogo.apps.Starter'
 
 dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web"
+
     implementation project(":shared")
     implementation project(":management")
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation project(":shared").sourceSets.test.output
 }

@@ -4,5 +4,5 @@ import java.util.Optional;
 
 public interface OrderRepository {
     public void save(Order order);
-    Optional<Order> search(String id);
+    Optional<Order> search(OrderId id);
 }

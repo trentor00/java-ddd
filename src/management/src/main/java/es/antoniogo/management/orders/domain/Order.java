@@ -3,19 +3,19 @@ package es.antoniogo.management.orders.domain;
 import java.util.Objects;
 
 public final class Order {
-    private String id;
-    private String name;
+    private final OrderId id;
+    private final OrderName name;
 
-    public Order(String id, String name) {
+    public Order(OrderId id, OrderName name) {
         this.id = id;
         this.name = name;
     }
 
-    public String id() {
+    public OrderId id() {
         return id;
     }
 
-    public String name() {
+    public OrderName name() {
         return name;
     }
 

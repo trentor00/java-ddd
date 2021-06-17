@@ -1,5 +1,6 @@
 package es.antoniogo.apps.management.controller.orders;
 
+import es.antoniogo.management.orders.application.create.CreateOrderRequest;
 import es.antoniogo.management.orders.application.create.OrderCreator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public final class OrdersPutController {
 
     @PutMapping("/orders/{id}")
     public ResponseEntity<?> create(@PathVariable String id, @RequestBody Request request) {
-        creator.create(id, request.name());
+        creator.create(new CreateOrderRequest(id, request.name()));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

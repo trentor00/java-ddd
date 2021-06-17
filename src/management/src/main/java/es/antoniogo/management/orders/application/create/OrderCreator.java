@@ -1,6 +1,8 @@
 package es.antoniogo.management.orders.application.create;
 
 import es.antoniogo.management.orders.domain.Order;
+import es.antoniogo.management.orders.domain.OrderId;
+import es.antoniogo.management.orders.domain.OrderName;
 import es.antoniogo.management.orders.domain.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,8 @@ public final class OrderCreator {
         this.repository = repository;
     }
 
-    public void create(String id, String name) {
-        Order order = new Order(id, name);
+    public void create(CreateOrderRequest request) {
+        Order order = new Order(new OrderId(request.id()), new OrderName(request.name()));
 
         repository.save(order);
     }

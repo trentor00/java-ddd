@@ -1,6 +1,7 @@
 package es.antoniogo.management.orders.infrastructure;
 
-import es.antoniogo.management.orders.domain.Order;
+import es.antoniogo.management.orders.OrdersModuleInfrastructureTestCase;
+import es.antoniogo.management.orders.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -8,18 +9,17 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-final class InMemoryOrderRepositoryTest {
+final class InMemoryOrderRepositoryTest extends OrdersModuleInfrastructureTestCase {
     @Test
-    void save_a_valid_course() {
-        InMemoryOrderRepository repository = new InMemoryOrderRepository();
+    void save_a_order() {
+        Order order = OrderMother.random();
 
-        repository.save(new Order("some-id", "some-name"));
+        repository.save(order);
     }
 
     @Test
     void return_an_existing_order() {
-        InMemoryOrderRepository repository = new InMemoryOrderRepository();
-        Order order = new Order("some-id", "some-name");
+        Order order = OrderMother.random();
 
         repository.save(order);
 
@@ -27,9 +27,7 @@ final class InMemoryOrderRepositoryTest {
     }
 
     @Test
-    void not_return_a_non_existing_student() {
-        InMemoryOrderRepository repository = new InMemoryOrderRepository();
-
-        assertFalse(repository.search("non-existing-id").isPresent());
+    void not_return_a_non_existing_order() {
+        assertFalse(repository.search(OrderIdMother.random()).isPresent());
     }
 }

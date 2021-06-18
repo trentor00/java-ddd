@@ -1,4 +1,4 @@
-package es.antoniogo.management.orders.infrastructure;
+package es.antoniogo.management.orders.infrastructure.persistence;
 
 import es.antoniogo.management.orders.domain.Order;
 import es.antoniogo.management.orders.domain.OrderId;
@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 @Repository
-public final class InMemoryOrderRepository implements OrderRepository {
+public class InMemoryOrderRepository implements OrderRepository {
     private HashMap<OrderId, Order> orders = new HashMap<>();
 
     @Override

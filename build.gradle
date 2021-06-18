@@ -52,9 +52,14 @@ subprojects {
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.hibernate:hibernate-core:5.5.2.Final'
+        implementation 'org.springframework:spring-orm'
+        implementation 'com.zaxxer:HikariCP:4.0.3'
 
         testImplementation rootProject.sourceSets.main.output
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        runtimeOnly 'mysql:mysql-connector-java:8.0.25'
 
         if (project.name != "shared") {
             implementation project(":shared")

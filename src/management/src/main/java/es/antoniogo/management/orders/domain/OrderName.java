@@ -6,4 +6,8 @@ public class OrderName extends StringValueObject {
     public OrderName(String value) {
         super(value);
     }
+
+    private OrderName() {
+        super("");
+    }
 }

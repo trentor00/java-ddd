@@ -11,6 +11,10 @@ public final class Order {
         this.name = name;
     }
 
+    private Order() {
+        this(null, null);
+    }
+
     public OrderId id() {
         return id;
     }

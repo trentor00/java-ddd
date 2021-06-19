@@ -1,4 +1,4 @@
-package es.antoniogo.management.orders.infrastructure;
+package es.antoniogo.management.orders.infrastructure.persistence;
 
 import es.antoniogo.management.orders.OrdersModuleInfrastructureTestCase;
 import es.antoniogo.management.orders.domain.*;

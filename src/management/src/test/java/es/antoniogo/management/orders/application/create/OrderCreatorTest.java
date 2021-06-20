@@ -15,16 +15,19 @@ final class OrderCreatorTest extends OrdersModuleUnitTestCase {
     protected void setUp() {
         super.setUp();
 
-        creator = new OrderCreator(repository);
+        creator = new OrderCreator(repository, eventBus);
     }
 
     @Test
     void save_a_valid_order() {
         CreateOrderRequest request = CreateOrderRequestMother.random();
+
         Order order = OrderMother.fromRequest(request);
+        OrderCreatedDomainEvent domainEvent = OrderCreatedDomainEventMother.fromOrder(order);
 
         creator.create(request);
 
         shouldHaveSaved(order);
+        shouldHavePublished(domainEvent);
     }
 }

@@ -1,8 +1,10 @@
 package es.antoniogo.management.orders.domain;
 
+import es.antoniogo.shared.domain.AggregateRoot;
+
 import java.util.Objects;
 
-public final class Order {
+public final class Order extends AggregateRoot {
     private final OrderId id;
     private final OrderName name;
 
@@ -12,7 +14,16 @@ public final class Order {
     }
 
     private Order() {
-        this(null, null);
+        id = null;
+        name = null;
+    }
+
+    public static Order create(OrderId id, OrderName name) {
+        Order order = new Order(id, name);
+
+        order.record(new OrderCreatedDomainEvent(id.value(), name.value()));
+
+        return order;
     }
 
     public OrderId id() {

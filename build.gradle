@@ -13,6 +13,10 @@ allprojects {
     }
 
     dependencies {
+        implementation 'org.hibernate:hibernate-core:5.5.2.Final'
+        implementation 'org.springframework:spring-orm'
+        implementation 'com.zaxxer:HikariCP:4.0.3'
+
         developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
         testImplementation 'com.github.javafaker:javafaker:1.0.2'
@@ -52,9 +56,6 @@ subprojects {
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'org.hibernate:hibernate-core:5.5.2.Final'
-        implementation 'org.springframework:spring-orm'
-        implementation 'com.zaxxer:HikariCP:4.0.3'
 
         testImplementation rootProject.sourceSets.main.output
         testImplementation 'org.springframework.boot:spring-boot-starter-test'

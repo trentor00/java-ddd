@@ -1,0 +1,22 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="es.antoniogo.management.orders_counter.domain.OrdersCounter" table="orders_counter">
+        <composite-id name="id" class="es.antoniogo.management.orders_counter.domain.OrdersCounterId" access="field">
+            <key-property column="id" name="value" length="36" access="field" />
+        </composite-id>
+
+        <component name="total" class="es.antoniogo.management.orders_counter.domain.OrdersCounterTotal" access="field">
+            <property name="value" column="total" type="integer" access="field" />
+        </component>
+
+        <property name="existingOrders" column="existing_orders" access="field">
+            <type name="json_string">
+                <param name="list_of">es.antoniogo.management.orders.domain.OrderId</param>
+            </type>
+        </property>
+    </class>
+</hibernate-mapping>

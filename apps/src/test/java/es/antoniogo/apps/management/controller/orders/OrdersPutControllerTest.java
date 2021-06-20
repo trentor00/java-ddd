@@ -1,11 +1,11 @@
 package es.antoniogo.apps.management.controller.orders;
 
-import es.antoniogo.apps.management.controller.RequestTestCase;
+import es.antoniogo.apps.management.controller.ApplicationTestCase;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-public final class OrdersPutControllerTest extends RequestTestCase {
+public final class OrdersPutControllerTest extends ApplicationTestCase {
     @Test
     void create_a_valid_order() throws Exception {
         assertRequestWithBody(
